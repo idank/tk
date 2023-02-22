@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+        crossorigin="anonymous">
+    <title>Delivery Management by Omri Kalman</title>
+    <style>
+        form {
+            font-size: 14px !important;
+            width: min(400px, 90%);
+        }
+    </style>
+</head>
+<body>
+    <form 
+        class="mx-auto my-5 shadow p-2" 
+        method="POST"
+        action="https://script.google.com/macros/s/AKfycbxuVsgqd5FNeCivdXsKq1WJLEwVHDd9maT78JEjul0AhvDrSwYAHbLHwDEcDkBzOrrs/exec">
+ 
+       <div class="mb-1 row g-0">
+
+            <label for="comments" class="form-label d-block text-center"><b>שמירת משלוח</b><br></label>
+
+            <label for="origin" class="col-sm-2 col-form-label text-center">מוצא</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="origin" list="origins" name="מוצא">
+                <datalist id="origins">
+                    <!-- javascript here -->
+                </datalist>
+            </div>
+        </div>
+        <div class="mb-1 row g-0">
+            <label for="destination" class="col-sm-2 col-form-label text-center">יעד</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="destination" name="יעד">
+            </div>
+        </div>
+        <div class="mb-1 row g-0">
+            <label for="customer" class="col-sm-2 col-form-label text-center">לקוח</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="customer" name="לקוח">
+            </div>
+        </div>
+        <div class="mb-1 row g-0">
+            <label for="price" class="col-sm-4 col-form-label text-center">מחיר (כולל מע"מ?)</label>
+            <div class="col-sm-1">
+                    <input type="checkbox" id="maam" name="כולל מעמ" value="1">
+            </div>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="price" name="מחיר">
+            </div>
+        </div>
+        <div class="mb-1 row g-0">
+            <label for="courier" class="col-sm-2 col-form-label text-center">שליח</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="courier" name="שליח">
+            </div>
+        </div>
+        <div class="mb-1 row g-0">
+            <label for="wage" class="col-sm-2 col-form-label text-center">תגמול</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="wage" name="תגמול">
+            </div>
+        </div>
+        <div class="mb-1 row g-0">
+            <label for="date" class="col-sm-2 col-form-label text-center">תאריך</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="date" name="תאריך">
+            </div>
+        </div>
+        <div class="mb-1 row g-0">
+            <label for="comments" class="col-sm-2 col-form-label text-center">הערות</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="comments" name="הערות">
+            </div>
+        </div>
+        <button type="submit" class="w-100 btn btn-primary">שמור</button>
+
+    </form>
+    <script>
+        const getData = async() => {
+            const data = //async code here
+            ["ראשון לציון", "תל אביב", "ירושלים", "חיפה", "באר שבע"];
+
+            sessionStorage.setItem("origins", JSON.stringify(data));
+        }
+        
+        window.addEventListener("load", async()=>{
+            await getData();
+            // finished waiting, sessionStorage is now populated.
+            const originsArr = JSON.parse(sessionStorage.getItem("origins"));
+            const originsList = document.getElementById("origins");
+            let htmlContent = "";
+            for (const item of originsArr) {
+                htmlContent +=`
+                <option value="${item}">
+                `;
+            }
+            originsList.innerHTML = htmlContent;
+        });
+
+    </script>
+</body>
+</html>
